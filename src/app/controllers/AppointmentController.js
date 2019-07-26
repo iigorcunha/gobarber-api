@@ -74,12 +74,7 @@ class AppointmentController {
      * Check if is Yourself creating an appointment
      */
 
-    const isYourself = await Appointment.findOne({
-      where: { user_id: req.userId, provider_id },
-      attributes: ['user_id', 'provider_id'],
-    });
-
-    if (isYourself.user_id === isYourself.provider_id) {
+    if (req.userId === provider_id) {
       return res
         .status(400)
         .json({ error: 'You can not create appointments for yourself' });
